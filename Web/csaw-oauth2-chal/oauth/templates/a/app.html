@@ -1,0 +1,65 @@
+{% extends "a/base.html" %}
+
+{% block content %}
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Create Application</h3>
+    </div>
+    <div class="panel-body">
+        {% if error or success %}
+        <div class="alert alert-dismissible alert-{% if error %}danger{% else %}success{% endif %}">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {% if success %}{{ success | safe }}{% else %}{{ error | safe }}{% endif %}
+        </div>
+        {% endif %}
+        {% if not token %}
+        <form class="form-horizontal" method="post">
+            <fieldset>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Application Name</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" name="name" placeholder="Application Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Description</label>
+                    <div class="col-lg-10">
+                        <textarea name="desc" class="form-control" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Redirect URL</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" name="redirect" placeholder="http://your-application.com/oauth-landingpage">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Application Permissions</label>
+                    <div class="col-lg-10"><div class="row">
+                        <div class="col-lg-6">
+                            <input type="checkbox" name="scope" value="user:info:read"> Read User Email
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="checkbox" name="scope" value="user:status:read"> Read User Broadcasts
+                        </div>
+                    </div></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="submit" name="login" class="btn btn-primary">Create</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        {% else %}
+        <div class="alert alert-success">
+            <h4>Congrats! Your application has be created!</h4>
+            <p>Here is your OAuth2 token, keep it safe! <pre>{{ token }}</pre></p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+

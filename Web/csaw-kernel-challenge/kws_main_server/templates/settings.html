@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}KWS - Account Settings{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-sm-12">
+    <h1 class="page-header">User Account Settings</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel panel-info">
+      <div class="panel-body">
+        Logged in as <strong>{{ user.name }}</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        Password
+      </div>
+      <div class="panel-body">
+        {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+        {% if success %}
+        <div class="alert alert-success">{{ success }}</div>
+        {% endif %}
+        <form role="form" action="/settings" method="POST">
+          <fieldset>
+            <span class="help-block">Make sure you remember the password you enter below, you will need it to login.</span>
+            <div class="form-group">
+              <input class="form-control" placeholder="New Password" type="password"
+                name="password" autofocus required>
+            </div>
+            <div class="form-group">
+              <input class="form-control" placeholder="New Password Confirm" type="password"
+                name="passwordconf" required>
+            </div>
+            <input type="submit" class="btn btn-block btn-danger" value="Change Password">
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

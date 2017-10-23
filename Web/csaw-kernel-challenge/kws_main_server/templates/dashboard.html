@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}KWS - Dashboard {% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Dashboard</h1>
+    </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel panel-info">
+      <div class="panel-body">
+        Logged in as <strong>{{ user.name }}</strong>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+    <div class="col-lg-4 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-server fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">1</div>
+                        <div>KWS Instance</div>
+                    </div>
+                </div>
+            </div>
+            <a href="/instance">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-cubes fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge" id="objectCount">-</div>
+                        <div>KWS Objects</div>
+                    </div>
+                </div>
+            </div>
+            <a href="/instance">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-12">
+        <div class="panel panel-red">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-bell-o fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge" id="objectCount">{{ instance.events | length }}</div>
+                        <div>Alerts</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#" id="viewAlerts">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+var ip = "{{ instance.ip }}";
+
+// itsdangerous signed requests
+var objectListRequest = decodeURIComponent("{{ objectListRequest }}");
+</script>
+<script src="/static/js/dashboard.js"></script>
+
+{% endblock %}

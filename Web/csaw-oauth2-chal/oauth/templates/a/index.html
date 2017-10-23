@@ -1,0 +1,27 @@
+{% extends "a/base.html" %}
+
+{% block content %}
+<div class="row">
+<div class="jumbotron">
+    <h1>Welcome to Broadcastr</h1>
+    <p>Here you can broadcast what matters most to you, directly to your followers. Broadcastr is built for high reliability and on cutting edge technology. We even have an API!</p>
+    <p><a class="btn btn-primary btn-lg" href="login?reg">Sign Up Now</a></p>
+</div>
+</div>
+<div class="row">
+    <div class="page-header">
+        <h3>Happening now</h3>
+    </div>
+    {% for s in top %}
+    <div class="col-lg-4 col-md-4 col-sm-12">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <strong><a href="/u/{{ s[0].username }}">{{ s[0].username }}</a></strong>
+            <p style="overflow-wrap: break-word;">{{ s[1][0] }}</p>
+        </div>
+    </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "b/base.html" %}
+
+{% block stylesheets %}
+<script src='https://www.google.com/recaptcha/api.js'></script>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Send Issue Report</h1>
+</div>
+{% if visit %}{% if visit['done'] %}
+<div class="alert alert-success">The admin has seen your report! Thank you for your help.</div>
+{% else %}
+<div class="alert alert-info">The admin will view your report soon...</div>{% endif %}
+{% else %}
+{% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+<form class="form-horizontal" method="post">
+    <fieldset>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Username</label>
+            <div class="col-lg-10">
+              <input type="text" class="form-control" value="{{ user }}" disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Misbehaving Page</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" name="url" placeholder="URL" required>
+                <span class="help-block">Enter the URL of the page that you were having problems on. We will visit it to see what is wrong.</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Report</label>
+            <div class="col-lg-10">
+                <textarea class="form-control" name="report" rows="3"></textarea>
+                <span class="help-block">Describe what your problem is.</span>
+            </div>
+        </div>
+        <div class="form-group">
+          <div class="col-lg-10 col-lg-offset-2">
+              <div class="g-recaptcha" data-sitekey="{{ captcha }}"></div>
+          </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="submit" name="login" class="btn btn-primary">Submit Report</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+{% endif %}
+
+{% endblock %}

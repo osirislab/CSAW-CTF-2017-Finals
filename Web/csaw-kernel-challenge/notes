@@ -1,0 +1,35 @@
+Type = *(obj+8)
+0x3f is int
+0x36 is Float
+0x48 is string
+0x2c is dict
+0x28 is list
+5 is None
+
+
+Int/Float
+data = obj+0x10
+
+
+String 
+length = obj+0x10
+data = obj+0x24
+
+
+Dict
+total_length = obj+0x10
+used_count = obj+0x18
+table_ptr =  obj+0x28
+
+Dict Entries
+Key = ent+8
+Value = ent+0x10
+
+
+List
+length = obj+0x10
+array_ptr = obj+0x18
+
+
+
+

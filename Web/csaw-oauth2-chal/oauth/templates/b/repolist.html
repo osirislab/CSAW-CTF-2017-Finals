@@ -1,0 +1,32 @@
+{% extends "b/base.html" %}
+
+{% block content %}
+<div class="page-header">
+  <h1>{{ info[0] }} / {{ info[1] }}</h1>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">Files</div>
+  <div class="panel-body list-group">
+    {% if files | length == 0%}
+    No files
+    {% else %}
+    {% for f in files %}
+      <a class="list-group-item" href="/{{ info[0] }}/{{ info[1] }}/{{ f }}">{{ f }}</a>
+    {% endfor %}
+    {% endif %}
+  </div>
+</div>
+{% if readme %}
+<div class="panel panel-default">
+  <div class="panel-heading">README.md</div>
+  <div class="panel-body" id="markdown">
+{{ readme }}
+  </div>
+</div>
+{% endif %}
+<script src="/static/js/markdown.min.js"></script>
+<script>
+$('#markdown').html(markdown.toHTML($('#markdown').text()));
+</script>
+
+{% endblock %}

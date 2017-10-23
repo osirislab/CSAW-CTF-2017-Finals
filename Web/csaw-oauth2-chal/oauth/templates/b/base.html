@@ -1,0 +1,54 @@
+<!doctype HTML>
+<html>
+    <head>
+        <title>Source Bucket</title>
+        <link rel="stylesheet" href="/static/css/cosmo.min.css">
+        <link rel="stylesheet" href="/static/css/sticky-footer-navbar.css">
+		<script src="/static/js/jquery-3.2.1.min.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        <nav class="navbar navbar-default"><div class="container-fluid">
+            <div class="navbar-header">
+                <a href="/" class="navbar-brand">Source Bucket</a>
+            </div>
+            <div class="nav navbar-nav">
+                <ul class="nav navbar-nav">
+                    <li><a href="/repos">Repos</a></li>
+                    <li><a href="/report">Report Issue</a></li>
+                </ul>
+            </div>
+            <div class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav">
+                    {% if user %}
+                    <li><a href="/profile">{{ user }}</a></li>
+                    <form action="/logout" id="logout" method="POST" style="display: none;">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                    </form>
+                    <li><a href="#" onclick="$('#logout').submit();">Logout</a></li>
+                    {% else %}
+                    <li><a href="/login">Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+
+        </div>
+
+        <!--footer class="footer">
+            <div class="container text-center">
+                <p class="text-muted">&copy; 2017 Broadcastr. Are you a developer? Check out our api on <a href="{{ BUCKET }}/broadcastr/broadcastr-api">SourceBucket</a></p>
+            </div>
+        </footer-->
+
+    </body>
+</html>
+
+
+
+

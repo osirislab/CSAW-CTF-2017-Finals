@@ -1,0 +1,14 @@
+<html>
+    <body>
+        <h1>Internal Flag Service</h1>
+        <form action="/flag" method="post">
+            <input type="hidden" name="token" value="{{ token }}">
+            <input type="submit" value="Retrive Flag">
+        </form>
+        {% if flag %}
+        <pre>{{ flag }}</pre>
+        {% endif %}
+    </body>
+</html>
+
+

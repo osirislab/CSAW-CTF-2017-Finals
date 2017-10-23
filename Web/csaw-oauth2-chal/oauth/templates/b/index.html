@@ -1,0 +1,50 @@
+{% extends "b/base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Why Choose Source Bucket?</h3>
+            </div>
+            <div class="panel-body">
+                <p>Source Bucket is the number one leading provider of cloud code storage.</p>
+                <p>With both public and private repositories, you can keep code you care about safe.</p>
+                <p>With our new login system, you don't even have to create a new account to start giving us money to host your source files!</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Who Uses Source Bucket?</h3>
+            </div>
+            <div class="panel-body">
+                <p>Don't trust us? Just check out some testimonials</p>
+                <blockquote>
+                    <p>We use Source Bucket for everything, even our secret dev flag service. They are the best!</p>
+                    <small><a href="{{ STATUS }}">Broadcastr Team</a></small>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">Source Bucket News</h3>
+    </div>
+    <div class="panel-body">
+        <h2><strong>New:</strong> Login With Broadcastr</h2>
+        <p>Thanks to the power of Oauth2, we are proud to announce that we now support logging in with your <a href="{{ STATUS }}">Broadcastr</a>.</p>
+        <p>Broadcastr is the new and upcoming social media platform. Here at source bucket, we believe that coders should be social, so we have replaced our normal account system in favor of this new system.</p>
+        <h3>FAQ</h3>
+        <h4>What happened to my old Source Bucket account?</h4>
+        <p>We gave all our account information to the Broadcastr team, so they could hook you up with an account there.</p>
+        <h4>What if I don't want a Broadcastr account?</h4>
+        <p>What is the harm in being a little more social? Don't want people to think you are locked away in your basement all day. Trust us, this is for your own good.</p>
+        <h4>Why would you do this?</h4>
+        <p>Broadcastr gave us some of that sweet VC gold.</p>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "b/base.html" %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Repos</h1>
+</div>
+{% if user == 'broadcastr' %}
+<div class="list-group">
+  <a class="list-group-item" href="/broadcastr/broadcastr-api">broadcastr-api</a>
+  <a class="list-group-item" href="/broadcastr/flag-service">flag-service <span class="text-muted">(Private)</span></a>
+</div>
+{% else %}
+<strong>You have no repos</strong>
+{% endif %}
+{% endblock %}

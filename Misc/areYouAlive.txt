@@ -1,0 +1,3 @@
+Title: Are you alive?
+Desc: python -c "print('666c61677b315f77346e3733645f74305f73683472655f773174685f7930755f6d795f66347630723174335f535433475f707230706c336d7d'.decode('hex'))" | cowsay -f stegosaurus -W 67 | lolcat
+Recommended Points: About 3

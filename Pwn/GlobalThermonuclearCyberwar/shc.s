@@ -1,0 +1,8 @@
+[bits 16]
+
+mov ax, 0x1300
+mov bx, 0x000f
+mov cx, 40
+mov dx, 0x0000
+mov bp, 0x1664
+int 0x10

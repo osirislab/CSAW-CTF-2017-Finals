@@ -1,0 +1,16 @@
+appdirs==1.4.3
+click==6.7
+Flask==0.12.2
+Flask-OAuthlib==0.9.3
+Flask-Session==0.3.1
+itsdangerous==0.24
+Jinja2==2.9.6
+MarkupSafe==1.0
+oauthlib==2.0.2
+packaging==16.8
+pyotp==2.2.4
+pyparsing==2.2.0
+requests==2.14.2
+requests-oauthlib==0.8.0
+six==1.10.0
+Werkzeug==0.12.2

@@ -1,0 +1,49 @@
+{% extends "b/base.html" %}
+
+{% block stylesheets %}
+<link href="/static/css/prism.css" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>{{ info[0] }} / {{ info[1] }}</h1>
+</div>
+{% if type == 'md' %}
+  <div class="panel panel-default">
+    <div class="panel-heading"><a href="/{{ info[0] }}/{{ info[1] }}">{{ info[1] }}</a> 
+      / {{ name }}</div>
+    <div class="panel-body" id="markdown">
+{{ contents }}
+    </div>
+  </div>
+  <script src="/static/js/markdown.min.js"></script>
+  <script>
+  $('#markdown').html(markdown.toHTML($('#markdown').text()));
+  </script>
+{% endif %}
+{% if type == 'py' %}
+  <div class="panel panel-default">
+    <div class="panel-heading"><a href="/{{ info[0] }}/{{ info[1] }}">{{ info[1] }}</a> 
+      / {{ name }}</div>
+    <div class="panel-body">
+        <pre><code class="language-python">
+{{ contents }}
+        </code></pre>
+    </div>
+  </div>
+  <script src="/static/js/prism.js"></script>
+{% endif %}
+{% if type == 'html' %}
+  <div class="panel panel-default">
+    <div class="panel-heading"><a href="/{{ info[0] }}/{{ info[1] }}">{{ info[1] }}</a> 
+      / {{ name }}</div>
+    <div class="panel-body">
+        <pre><code class="language-markup">
+{{ contents }}
+        </code></pre>
+    </div>
+  </div>
+  <script src="/static/js/prism.js"></script>
+{% endif %}
+
+{% endblock %}

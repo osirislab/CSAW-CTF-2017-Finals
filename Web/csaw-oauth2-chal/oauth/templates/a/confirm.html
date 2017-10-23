@@ -1,0 +1,26 @@
+{% extends "a/base.html" %}
+
+{% block content %}
+<div class="panel panel-warning">
+    <div class="panel-heading">
+      <h3 class="panel-title"><strong>Allow Access?</strong></h3>
+    </div>
+    <div class="panel-body">
+      <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Look Out!</strong> 
+        Make sure to read this page carefully. Don't give access to apps you don't trust.
+      </div>
+        <p>Applcation <b>{{ client.name }}</b> wants to access your account.</p>
+        <p>Do you give {{ client.name }} permission to:</p>
+        <ul>{% for s in scopes %}
+            <li>{{ s }}</li>
+        {% endfor %}</ul>
+        <p>More info: {{ client.description }}</p>
+        <form action="" method="post">
+            <input type="submit" class="btn btn-danger" name="confirm" value="No">&nbsp;
+            <input type="submit" class="btn btn-success" name="confirm" value="Yes">
+        </form>
+    </div>
+</div>
+{% endblock %}

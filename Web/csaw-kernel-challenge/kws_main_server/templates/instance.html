@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}KWS - Instance Settings{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-sm-12">
+    <h1 class="page-header">Instance Settings</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+          Instance: <strong>{{ instance.name }}</strong>
+      </div>
+      <div class="panel-body">
+        <strong>IP:</strong> {{ instance.ip }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        New Object
+      </div>
+      <div class="panel-body">
+        <div id="alert"></div>
+        <fieldset>
+          <span class="help-block">Store a new object in this KWS instance</span>
+          <div class="form-group">
+            <input class="form-control" placeholder="Object Name" type="text" id="name"
+              name="name" autofocus required>
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" placeholder="JSON Object" name="object" id="object"></textarea>
+          </div>
+          <button type="submit" class="btn btn-block btn-success" id="create">Create Object</button>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Preview
+      </div>
+      <div class="panel-body" id="preview">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+          Objects
+      </div>
+      <div class="panel-body">
+          <div class="row" id="objectList">
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+var ip = "{{ instance.ip }}";
+
+// itsdangerous signed requests
+var objectListRequest = decodeURIComponent("{{ objectListRequest }}");
+</script>
+<script src="/static/js/json-formatter.js"></script>
+<script src="/static/js/instance.js"></script>
+
+{% endblock %}

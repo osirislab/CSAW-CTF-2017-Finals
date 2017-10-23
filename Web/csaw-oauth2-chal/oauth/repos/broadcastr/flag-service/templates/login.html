@@ -1,0 +1,13 @@
+<html>
+    <body>
+        {% if error %}<div>{{ error }}</div>{% endif %}
+        {% if success %}<div>{{ success }}</div>{% endif %}
+        <form method="post">
+            <label>Username</label>
+            <input name="user">
+            <label>Password</label>
+            <input name="pass">
+            <input type="submit" name="login" value="Login">
+        </form>
+    </body>
+</html>

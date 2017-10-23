@@ -1,0 +1,11 @@
+<html>
+    <body>
+        <h3>Post Status</h3>
+        <p>Last status: {{ user.status }}</p>
+        <form action="" method="post">
+            <input type="hidden" name="token" value="{{ token }}">
+            <textarea name="status"></textarea>
+            <input type="submit" value="Post Status">
+        </form>
+    </body>
+</html>

@@ -1,0 +1,80 @@
+{% extends "a/base.html" %}
+
+{% block content %}
+{% if error or success %}
+<div class="alert alert-dismissible alert-{% if error %}danger{% else %}success{% endif %}">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {% if success %}{{ success | safe }}{% else %}{{ error | safe }}{% endif %}
+</div>
+{% endif %}
+
+<div class="row">
+{% if fuser %}
+    <div class="col-lg-2">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ fuser.username }}</h3>
+            </div>
+            <div class="panel-body">
+                <p><strong>Followers:</strong> {{ fuser.follower_count }}</p>
+                {% if user and fuser.id != user.id %}
+                    {% if fuser.id in user.following %}
+                    <form action="/unfollow" method="POST">
+                        <input type="hidden" value="{{ fuser.id }}" name="id">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                        <button type="submit" class="btn btn-danger">Unfollow</button>
+                    </form>
+                    {% else %}
+                    <form action="/follow" method="POST">
+                        <input type="hidden" value="{{ fuser.id }}" name="id">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                        <button type="submit" class="btn btn-primary">Follow</button>
+                    </form>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-10">
+{% else %}
+    <div class="col-lg-12">
+{% endif %}
+
+    {% if new and new | length != 0 %}
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">Who to follow</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="list-group">
+            {% for n in new %}
+            <a href="/u/{{ n.username }}" class="list-group-item">
+                <span class="badge">{{ n.follower_count }} Followers</span>
+                {{ n.username }}
+            </a>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+
+
+    {% if timeline | length == 0 %}
+    <div class="text-center">
+        <p class="text-muted">{% if fuser %}This user has nothing to say :({% else %}You are not following anyone yet :({% endif %}</p>
+    </div>
+    {% endif %}
+
+    {% for s in timeline %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <strong><a href="/u/{{ s[0].username }}">{{ s[0].username }}</a></strong>
+            <p style="overflow-wrap: break-word;">{{ s[1][0] }}</p>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}

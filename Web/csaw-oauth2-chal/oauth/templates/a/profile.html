@@ -1,0 +1,126 @@
+{% extends "a/base.html" %}
+
+{% block content %}
+
+{% if error or success %}
+<div class="alert alert-dismissible alert-{% if error %}danger{% else %}success{% endif %}">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {% if success %}{{ success | safe }}{% else %}{{ error | safe }}{% endif %}
+</div>
+{% endif %}
+
+<ul class="nav nav-tabs">
+    <li class="{%if not tab or tab==0 %}active{% endif %}"><a href="#general" data-toggle="tab" aria-expanded="true">General</a></li>
+    <li class="{%if tab==1 %}active{% endif %}"><a href="#password" data-toggle="tab" aria-expanded="false">Password</a></li>
+    <li class="{%if tab==2 %}active{% endif %}"><a href="#apps" data-toggle="tab" aria-expanded="false">Applications</a></li>
+</ul>
+<div class="tab-content" style="padding-top: 30px">
+    <div class="tab-pane fade {%if not tab or tab==0 %}active in{% endif %}" id="general">
+        <form class="form-horizontal" method="post">
+            <fieldset>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Username</label>
+                    <div class="col-lg-10">
+                        <p class="form-control-static">{{ user.username }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Email</label>
+                    <div class="col-lg-10">
+                        <input type="email" class="form-control" name="email" placeholder="Email" value="{{ user.email }}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="submit" name="update" class="btn btn-primary">Update</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="tab-pane fade {%if tab==1 %}active in{% endif %}" id="password">
+        <form class="form-horizontal" method="post">
+            <fieldset>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Current Password</label>
+                    <div class="col-lg-10">
+                        <input type="password" class="form-control" name="curpassword" placeholder="Current Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Password</label>
+                    <div class="col-lg-10">
+                        <input type="password" class="form-control" name="password" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Confirm Password</label>
+                    <div class="col-lg-10">
+                        <input type="password" class="form-control" name="confpassword" placeholder="Confirm Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="submit" name="password" class="btn btn-warning">Change Password</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="tab-pane fade {%if tab==2 %}active in{% endif %}" id="apps">
+        {% if didtoks %}
+        {% if toks %}
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h3 class="panel-title">Authorized Applications</h3>
+            </div>
+            <div class="panel-body">
+            {% for t in toks %}
+            <div class="row">
+                <div class="col-lg-2">
+                    <p><strong>{{ t[1].name }}</strong></p>
+                </div>
+                <div class="col-lg-10">
+                    <p>{{ t[1].description }}</p>
+                    <p><strong>Permissions:</strong> {{ t[0]._scopes }}</p>
+                </div>
+            </div>
+            {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        {% if apps %}
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Your Applications</h3>
+            </div>
+            <div class="panel-body">
+            {% for t in apps %}
+            <div class="row">
+                <div class="col-lg-2">
+                    <p><strong>{{ t.name }}</strong></p>
+                </div>
+                <div class="col-lg-10">
+                    <p>{{ t.description }}</p>
+                    <p><strong>Permissions:</strong> {{ t._default_scopes }}</p>
+                </div>
+            </div>
+            {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        <p class="text-muted">Don't know what this is? <a href="{{ BUCKET }}/broadcastr/broadcastr-api">Check out our API</a></p>
+
+        {% else %}
+        <script>
+        $('a[data-toggle="tab"][href="#apps"]').on('show.bs.tab', function(e) {
+            location = "/profile?apps";
+        });
+        </script>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}
